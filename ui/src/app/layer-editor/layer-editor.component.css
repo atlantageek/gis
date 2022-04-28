@@ -1,0 +1,19 @@
+:host {
+    width:100%;
+    display:flex;
+
+    margin-top:40px;
+    margin-left:20px;
+    
+    height:100%;
+}
+
+.layer-list{
+    flex-grow:2;
+}
+.layer-entry {
+    flex-grow:1
+}
+table {
+    width: 100%;
+  }

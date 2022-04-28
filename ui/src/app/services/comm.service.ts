@@ -4,7 +4,16 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import * as moment from "moment";
 
-
+export interface LayerRec{
+    id:number,
+    name:string,
+    enabled:boolean,
+    layer_type:string,
+    source:string,
+    uri:string,
+    filter:string,
+    franchise_id:number
+}
 
 @Injectable()
 export class CommService {
@@ -40,13 +49,7 @@ export class CommService {
         let result = this.http.post('/api/auth/login', JSON.stringify(body),{'headers':headers}).pipe(tap(res=>{console.log(res);this.setSession(res)}),catchError(this.handleError))
         return result;
     }
-    private setSession(authResult: any) {
-        if (authResult.hasOwnProperty('error')) throw <string>authResult.error;
-        const expiresAt = moment().add(authResult.expiresIn,'second');
-        this.validateSession(authResult);
-        localStorage.setItem("authResult", JSON.stringify(authResult) );
 
-    }
     public checkLogin():boolean {
         
         let auth = localStorage.getItem("authResult");
@@ -59,8 +62,24 @@ export class CommService {
     public getUser():string {
         return this.currentUserValue;
     }
+
+    public getLayers():Observable<LayerRec[]> {
+        debugger;
+        return this.http.get<LayerRec[]>('/api/geolayers', CommService.httpOptions)
+              .pipe(
+              tap(data => console.log(data)), // eyeball results in the console
+            catchError(err => this.handleError(err)))
+
+    }
+    private setSession(authResult: any) {
+        if (authResult.hasOwnProperty('error')) throw <string>authResult.error;
+        const expiresAt = moment().add(authResult.expiresIn,'second');
+        this.validateSession(authResult);
+        localStorage.setItem("authResult", JSON.stringify(authResult) );
+
+    }
     private validateSession(authResult:any) {
-        let hdrs= new HttpHeaders().append('Content-Type','application/json').append('Authorization',authResult);
+        let hdrs= new HttpHeaders().append('Content-Type','application/json').append('Authorization',authResult.token);
         console.log(authResult);
         CommService.httpOptions.headers=hdrs;
         this.currentFranchiseId=authResult.franchise_id;

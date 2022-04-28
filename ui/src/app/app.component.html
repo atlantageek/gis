@@ -15,20 +15,22 @@
   <mat-sidenav mode="side" #sidenav  opened="true">
     nodehealth
     <mat-list>
-      <button mat-flat-button>Layer Config</button>
+      <button routerLink="layer-editor" mat-flat-button>Layer Config</button>
     </mat-list>
     
 
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
-      Main content goes here
+      <!--<p><button color="accent" mat-raised-button (click)="sidenav.toggle()">>></button></p>-->
+      <router-outlet></router-outlet>
     </div>
-    <router-outlet></router-outlet>
-      <p><button color="accent" mat-raised-button (click)="sidenav.toggle()">>></button></p>
+    
+      
   </mat-sidenav-content>
 </mat-sidenav-container>
 <ng-template #notlogin>
   <router-outlet></router-outlet>
 </ng-template>
+<!--<app-sitenav></app-sitenav>-->
 

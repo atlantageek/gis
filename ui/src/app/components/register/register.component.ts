@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommService } from "src/app/services/CommService";
+import { CommService } from "src/app/services/comm.service";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

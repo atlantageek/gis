@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { CommService } from './services/CommService';
+import { CommService } from './services/comm.service';
 
 @Component({
   selector: 'app-root',
