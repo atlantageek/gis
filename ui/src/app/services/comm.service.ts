@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subscription, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import * as moment from "moment";
+import { Router } from "@angular/router";
 
 export interface LayerRec{
     id:number,
@@ -25,7 +26,12 @@ export class CommService {
           'Content-Type':  'application/json'
         })
       };
-    constructor(private http: HttpClient) {
+    static externalHttpOptions={
+        headers: new HttpHeaders({
+            'Content-Type':  'application/json'
+          })
+    }
+    constructor(private http: HttpClient, private router:Router) {
         // if (this.isLoggedIn()) {
         //     this.currentUserValue=parseInt(localStorage.getItem("user_id"))
         // }
@@ -64,12 +70,45 @@ export class CommService {
     }
 
     public getLayers():Observable<LayerRec[]> {
-        debugger;
         return this.http.get<LayerRec[]>('/api/geolayers', CommService.httpOptions)
               .pipe(
               tap(data => console.log(data)), // eyeball results in the console
             catchError(err => this.handleError(err)))
 
+    }
+
+    public getCapabilities(url:string){
+        console.log("Doing httpget")
+        //'https://geo.weather.gc.ca/geomet?lang=en&service=WMS&version=1.3.0&request=GetCapabilities'
+        let urlObj = new URL(url);
+        urlObj.searchParams.set('request','GetCapabilities')
+        debugger;
+        return this.http.get(urlObj.href,{responseType: 'text'})
+        .pipe(
+            tap((response) => {console.log('got data');}),
+            catchError(err => this.handleError(err)))
+        
+    } 
+    private handleError(error: HttpErrorResponse) {
+        console.log(error)
+        debugger;
+        if (error.status==401) {
+            localStorage.clear();
+            this.router.navigate(['/'], {  });
+        }
+        else if (error.error instanceof ErrorEvent) {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.error('An error occurred:', error.error.message);
+        } else {
+            // The backend returned an unsuccessful response code.
+            // The response body may contain clues as to what went wrong.
+            console.error(
+                `Backend returned code ${error.status}, ` +
+                `body was: ${error.error}`);
+        }
+        // Return an observable with a user-facing error message.
+        return throwError(
+            'Something bad happened; please try again later.');
     }
     private setSession(authResult: any) {
         if (authResult.hasOwnProperty('error')) throw <string>authResult.error;
@@ -88,20 +127,5 @@ export class CommService {
         return true;
     }
 
-    private handleError(error: HttpErrorResponse) {
-        console.log(error)
-        if (error.error instanceof ErrorEvent) {
-            // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error.message);
-        } else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong.
-            console.error(
-                `Backend returned code ${error.status}, ` +
-                `body was: ${error.error}`);
-        }
-        // Return an observable with a user-facing error message.
-        return throwError(
-            'Something bad happened; please try again later.');
-    }
+
 }

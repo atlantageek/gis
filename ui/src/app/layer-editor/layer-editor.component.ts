@@ -18,7 +18,6 @@ export class LayerEditorComponent implements OnInit {
     console.log("Layer Editor star")
     this._api_service.getLayers().subscribe((data:LayerRec[]) => {
       this.layerList=data;
-      debugger;
     })
   }
 
