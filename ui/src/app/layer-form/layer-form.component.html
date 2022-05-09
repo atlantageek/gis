@@ -1,6 +1,7 @@
 <p>layer-form works!</p>
 <form [formGroup]="form" (ngSubmit)="saveLayer(form)">
     <mat-form-field appearance="standard">
+        <input type="hidden" formControlName="id">
         <mat-label>Name</mat-label>
         <input matInput maxlength="15" inputmode="tel" placeholder="Type name" formControlName="name" #nameInput>
         <mat-hint>Mini character 5: {{ nameInput.value.length }}/5</mat-hint>
@@ -12,8 +13,8 @@
 
     <mat-form-field appearance="fill" hintLabel="">
         <mat-label>Layer Type</mat-label>
-        <mat-select matNativeControl name="type" formControlName="type">
-            <mat-option value="base">Base</mat-option>
+        <mat-select matNativeControl name="layer_type" formControlName="layer_type">
+            <mat-option value="baselayer">Base</mat-option>
             <mat-option value="secondary">Secondary</mat-option>
 
         </mat-select>
@@ -26,8 +27,8 @@
 
     <mat-form-field appearance="fill" hintLabel="">
         <mat-label>Layer from WMS</mat-label>
-        <mat-select matNativeControl name="country" formControlName="country">
-            <mat-option *ngFor="let layername of wms_layer_options" [ngValue]="layername">{{layername}}</mat-option>
+        <mat-select matNativeControl name="filter" formControlName="filter">
+            <mat-option *ngFor="let layername of wms_layer_options" [value]="layername">{{layername}}</mat-option>
 
         </mat-select>
     </mat-form-field>

@@ -76,7 +76,20 @@ export class CommService {
             catchError(err => this.handleError(err)))
 
     }
+    public getLayer(layerId:number):Observable<LayerRec> {
+        return this.http.get<LayerRec>('/api/geolayers/'+layerId, CommService.httpOptions)
+              .pipe(
+              tap(data => console.log(data)), // eyeball results in the console
+            catchError(err => this.handleError(err)))
 
+    }
+    public createLayer(body: any): Observable<any> {
+        console.log("Create Layer")
+        let result = this.http.post('/api/geolayers/', body, CommService.httpOptions).pipe(
+            catchError(this.handleError)
+        );
+        return result;
+    }
     public getCapabilities(url:string){
         console.log("Doing httpget")
         //'https://geo.weather.gc.ca/geomet?lang=en&service=WMS&version=1.3.0&request=GetCapabilities'

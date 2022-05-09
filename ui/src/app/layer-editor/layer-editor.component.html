@@ -1,5 +1,5 @@
 
-    <div class="layer-entry"><app-layer-form></app-layer-form></div>
+    <div class="layer-entry" ><app-layer-form [layerData]="currLayer"></app-layer-form></div>
     <div class="layer-list">
 <table mat-table [dataSource]="layerList">
     <ng-container matColumnDef="enabled">
@@ -7,8 +7,8 @@
         <td mat-cell *matCellDef="let layer"> {{layer.enabled}} </td>
     </ng-container>
     <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let layer"> {{layer.name}} </td>
+        <th mat-header-cell *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let layer"> <a mat-button style="text-decoration: underline;color:deepskyblue;" (click)="loadData(layer.id)">{{layer.name}}</a> </td>
     </ng-container>
     <ng-container matColumnDef="layer_type">
         <th mat-header-cell *matHeaderCellDef> Type </th>
