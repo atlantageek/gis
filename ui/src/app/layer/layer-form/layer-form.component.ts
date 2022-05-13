@@ -60,6 +60,7 @@ export class LayerFormComponent implements OnInit {
       let targets = dom.evaluate(xpath, dom, null, XPathResult.ANY_TYPE, null);
       const nodes = [];
       let node: Node | null;
+      debugger;
       while (node = targets.iterateNext()) {
         //console.log(node.nodeValue)
         if (node != null) {
