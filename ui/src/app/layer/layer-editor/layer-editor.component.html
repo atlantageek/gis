@@ -1,5 +1,6 @@
-
-    <div class="layer-entry" ><app-layer-form [layerData]="currLayer"></app-layer-form></div>
+<!-- 
+    <div class="layer-entry" ><app-layer-form [layerData]="currLayer"></app-layer-form></div> -->
+    <button (click)="newLayer()" mat-flat-button>New Layer</button>
     <div class="layer-list">
 <table mat-table [dataSource]="layerList">
     <ng-container matColumnDef="enabled">

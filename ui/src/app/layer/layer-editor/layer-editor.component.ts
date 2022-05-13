@@ -1,8 +1,9 @@
 import { getLocaleDayPeriods } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommService,LayerRec } from '../services/comm.service';
-
+import { CommService,LayerRec } from '../../services/comm.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { LayerFormComponent } from '../layer-form/layer-form.component';
 @Component({
   selector: 'app-layer-editor',
   templateUrl: './layer-editor.component.html',
@@ -12,7 +13,7 @@ export class LayerEditorComponent implements OnInit {
   layerList:LayerRec[]=[];
   currLayer:LayerRec | null=null;
   displayedColumns = ['enabled','name','layer_type'];
-  constructor(private _api_service:CommService, private router:Router) {
+  constructor(private _api_service:CommService, private router:Router,public dialog: MatDialog) {
     
    }
 
@@ -28,5 +29,15 @@ export class LayerEditorComponent implements OnInit {
       this.currLayer=data;
     })
   }
+  newLayer() {
+    const dialogRef = this.dialog.open(LayerFormComponent, {
+      width: '250px',
+      data: {},
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
+  }
 }

@@ -20,8 +20,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { LayerEditorComponent } from './layer-editor/layer-editor.component';
-import { LayerFormComponent } from './layer-form/layer-form.component';
 
 
 @NgModule({
@@ -30,9 +28,7 @@ import { LayerFormComponent } from './layer-form/layer-form.component';
     LogInComponent,
     RegisterComponent,
     MainComponent,
-    SitenavComponent,
-    LayerEditorComponent,
-    LayerFormComponent
+    SitenavComponent
   ],
   imports: [
     BrowserModule,

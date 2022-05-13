@@ -6970,3 +6970,277 @@ Processing by GeolayersController#index as HTML
 Completed 200 OK in 8ms (Views: 2.0ms | ActiveRecord: 0.6ms | Allocations: 2005)
 
 
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:12:11 -0400
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.1ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x000055c882fa7940>
+  [1m[36mGeolayer Load (0.2ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 40ms (Views: 8.7ms | ActiveRecord: 1.8ms | Allocations: 26639)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:20:15 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.1ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d8db8e08>
+  [1m[36mGeolayer Load (0.2ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 6ms (Views: 2.0ms | ActiveRecord: 0.9ms | Allocations: 2541)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:22:04 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.1ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d8e9ca40>
+  [1m[36mGeolayer Load (0.1ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 0.3ms | Allocations: 2026)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:22:08 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.2ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d8f40de8>
+  [1m[36mGeolayer Load (0.3ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 10ms (Views: 3.5ms | ActiveRecord: 0.7ms | Allocations: 2026)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:23:03 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.1ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d900c420>
+  [1m[36mGeolayer Load (0.1ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.3ms | Allocations: 2026)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:23:13 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.2ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d90d59b0>
+  [1m[36mGeolayer Load (0.3ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 8ms (Views: 3.1ms | ActiveRecord: 0.7ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:26:01 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.2ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d91b79c8>
+  [1m[36mGeolayer Load (0.2ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 6ms (Views: 2.5ms | ActiveRecord: 0.5ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:26:23 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.1ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d9360ec8>
+  [1m[36mGeolayer Load (0.1ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 5ms (Views: 2.1ms | ActiveRecord: 0.3ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:26:24 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.1ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d9428b08>
+  [1m[36mGeolayer Load (0.1ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 5ms (Views: 2.1ms | ActiveRecord: 0.4ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:26:25 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.2ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d96b25b8>
+  [1m[36mGeolayer Load (0.2ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 7ms (Views: 2.2ms | ActiveRecord: 0.6ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:26:32 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.2ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d979a430>
+  [1m[36mGeolayer Load (0.2ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 7ms (Views: 2.4ms | ActiveRecord: 0.5ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:26:42 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.2ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d9896e88>
+  [1m[36mGeolayer Load (0.2ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 7ms (Views: 2.2ms | ActiveRecord: 0.5ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:26:51 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.1ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d994c990>
+  [1m[36mGeolayer Load (0.1ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 0.4ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:26:54 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.1ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d9a19a30>
+  [1m[36mGeolayer Load (0.1ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 5ms (Views: 1.6ms | ActiveRecord: 0.3ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:26:55 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.2ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d9ab8b80>
+  [1m[36mGeolayer Load (0.1ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 8ms (Views: 1.7ms | ActiveRecord: 0.5ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:26:58 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.1ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d9ba22a8>
+  [1m[36mGeolayer Load (0.1ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 6ms (Views: 2.0ms | ActiveRecord: 0.4ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:40:09 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.2ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d9e86668>
+  [1m[36mGeolayer Load (0.2ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 10ms (Views: 2.1ms | ActiveRecord: 1.0ms | Allocations: 2518)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:42:24 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.2ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99d9ee90b0>
+  [1m[36mGeolayer Load (0.2ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 10ms (Views: 4.3ms | ActiveRecord: 0.6ms | Allocations: 2005)
+
+
+Started GET "/geolayers" for 127.0.0.1 at 2022-05-12 21:58:27 -0400
+Processing by GeolayersController#index as HTML
+  Parameters: {"geolayer"=>{}}
+{"user_id"=>2, "franchise_id"=>1, "exp"=>1652409246}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:18:in `authorize_request'
+  [1m[36mFranchise Load (0.3ms)[0m  [1m[34mSELECT "franchises".* FROM "franchises" WHERE "franchises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:20:in `authorize_request'
+#<Franchise:0x00007f99c80d2668>
+  [1m[36mGeolayer Load (0.3ms)[0m  [1m[34mSELECT "geolayers".* FROM "geolayers" WHERE "geolayers"."franchise_id" = ?[0m  [["franchise_id", 1]]
+  ↳ app/controllers/geolayers_controller.rb:5:in `index'
+Completed 200 OK in 14ms (Views: 5.7ms | ActiveRecord: 1.6ms | Allocations: 2519)
+
+
