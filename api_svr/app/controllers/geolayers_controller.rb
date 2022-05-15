@@ -12,7 +12,7 @@ class GeolayersController < ApplicationController
 
     def create
         logger.debug("CREATE!")
-        @franchise=Franchise.find(params[:franchise_id])
+        #@franchise=Franchise.find(params[:franchise_id])
         @geolayer = @franchise.geolayers.new(
             name: params[:name],
             enabled: true,

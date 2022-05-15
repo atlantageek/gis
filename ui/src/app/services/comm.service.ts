@@ -47,12 +47,10 @@ export class CommService {
 
     login(email:string, password:string): Observable<any> {
         let body={'email':email, 'password':password}
-        console.log(body);
-        console.log("=========================")
         let headers=new HttpHeaders({
             'Content-Type':  'application/json'
           });
-        let result = this.http.post('/api/auth/login', JSON.stringify(body),{'headers':headers}).pipe(tap(res=>{console.log(res);this.setSession(res)}),catchError(this.handleError))
+        let result = this.http.post('/api/auth/login', JSON.stringify(body),{'headers':headers}).pipe(tap(res=>{this.setSession(res)}),catchError(this.handleError))
         return result;
     }
 
@@ -72,35 +70,44 @@ export class CommService {
     public getLayers():Observable<LayerRec[]> {
         return this.http.get<LayerRec[]>('/api/geolayers', CommService.httpOptions)
               .pipe(
-              tap(data => console.log(data)), // eyeball results in the console
+              tap(data => data), // eyeball results in the console
             catchError(err => this.handleError(err)))
 
     }
     public getLayer(layerId:number):Observable<LayerRec> {
         return this.http.get<LayerRec>('/api/geolayers/'+layerId, CommService.httpOptions)
               .pipe(
-              tap(data => console.log(data)), // eyeball results in the console
+              tap(data => data), // eyeball results in the console
             catchError(err => this.handleError(err)))
 
     }
     public createLayer(body: any): Observable<any> {
-        console.log("Create Layer")
         let result = this.http.post('/api/geolayers/', body, CommService.httpOptions).pipe(
             catchError(this.handleError)
         );
         return result;
     }
+    public updateLayer(body: any, id: number): Observable<any> {
+        let result = this.http.put('/api/geolayers/' + id, body, CommService.httpOptions).pipe(
+            catchError(this.handleError)
+        );
+        return result;
+    }
+    public deleteLayer(id:number):Observable<any> {
+        let result = this.http.delete('/api/geolayers/' + id, CommService.httpOptions).pipe(
+            catchError(this.handleError)
+        );
+        return result;
+    }
     public getCapabilities(url:string){
-        console.log("Doing httpget")
         //'https://geo.weather.gc.ca/geomet?lang=en&service=WMS&version=1.3.0&request=GetCapabilities'
         let urlObj = new URL(url);
         urlObj.searchParams.set('request','GetCapabilities')
-        debugger;
+
         return this.http.get(urlObj.href,{responseType: 'text'})
         .pipe(
             tap((response) => {console.log('got data');}),
             catchError(err => this.handleError(err)))
-        
     } 
     private handleError(error: HttpErrorResponse) {
         console.log(error)
@@ -132,7 +139,6 @@ export class CommService {
     }
     private validateSession(authResult:any) {
         let hdrs= new HttpHeaders().append('Content-Type','application/json').append('Authorization',authResult.token);
-        console.log(authResult);
         CommService.httpOptions.headers=hdrs;
         this.currentFranchiseId=authResult.franchise_id;
         this.currentUserId=authResult.user_id

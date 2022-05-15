@@ -1,8 +1,8 @@
 import { getLocaleDayPeriods } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommService,LayerRec } from '../../services/comm.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { CommService, LayerRec } from '../../services/comm.service';
+import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LayerFormComponent } from '../layer-form/layer-form.component';
 @Component({
   selector: 'app-layer-editor',
@@ -10,34 +10,66 @@ import { LayerFormComponent } from '../layer-form/layer-form.component';
   styleUrls: ['./layer-editor.component.css']
 })
 export class LayerEditorComponent implements OnInit {
-  layerList:LayerRec[]=[];
-  currLayer:LayerRec | null=null;
-  displayedColumns = ['enabled','name','layer_type'];
-  constructor(private _api_service:CommService, private router:Router,public dialog: MatDialog) {
-    
-   }
+  layerList: LayerRec[] = [];
+  currLayer: LayerRec | null = null;
+  displayedColumns = ['enabled', 'name', 'layer_type','action'];
+  constructor(private _commService: CommService, private router: Router, public dialog: MatDialog) {
+
+  }
 
   ngOnInit(): void {
     console.log("Layer Editor star")
-    this._api_service.getLayers().subscribe((data:LayerRec[]) => {
-      this.layerList=data;
+    this.updateList();
+
+  }
+  updateList():void {
+    this._commService.getLayers().subscribe((data: LayerRec[]) => {
+      this.layerList = data;
     })
   }
 
-  loadData(layerId:number) {
-    this._api_service.getLayer(layerId).subscribe((data:LayerRec) => {
-      this.currLayer=data;
+  loadData(layerId: number) {
+    this._commService.getLayer(layerId).subscribe((data: LayerRec) => {
+      this.showDialog(data);
+    })
+  }
+  deleteData(layerId: number) {
+    this._commService.deleteLayer(layerId).subscribe((data: LayerRec) => {
+      this.updateList();
     })
   }
   newLayer() {
-    const dialogRef = this.dialog.open(LayerFormComponent, {
-      width: '250px',
-      data: {},
-    });
+    this.showDialog(null);
+  }
+  showDialog(data: LayerRec | null) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+    // {
+    //   width: '250px',
+    //   data: {},
+    // }
+    dialogConfig.data = data;
+    const dialogRef = this.dialog.open(LayerFormComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      
+      if (result != null) {
+        if (result.id == null) {
+
+          this._commService.createLayer(JSON.stringify(result, null, 4)).subscribe(result => {
+            this.updateList()
+          })
+        }
+        else {
+          this._commService.updateLayer(JSON.stringify(result, null, 4), result.id).subscribe(result => {
+            alert("Saved")
+            this.updateList();
+          });
+        }
+
+      }
     });
   }
 }

@@ -1,12 +1,11 @@
-var xpath = require('xpath')
-  , dom = require('xmldom').DOMParser
+const fs=require('fs')
+const Dom = require('xmldom').DOMParser;
+const select = require('xpath');
 
-const fs = require("fs");
-const xml = fs.readFileSync(`${__dirname}/capabilities.xml`, "utf8");
-//console.log(xml)
-console.log("2")
-var doc = new dom().parseFromString(xml)
-var nodes = xpath.select('//*[local-name()="Layer"][@cascaded="0"]', doc)
-console.log(nodes)
-console.log(nodes[0].localName + ": " + nodes[0].firstChild.data)
-//console.log("Node: " + nodes[0].toString())
+const xml=fs.readFileSync(__dirname + '/foo.xml')
+const doc=new Dom().parseFromString(xml);
+const nodes = select(doc, '//layer');
+
+const orderIds = nodes.map((node) => node.getAttribute('order_id'));
+console.log(orderIds);
+

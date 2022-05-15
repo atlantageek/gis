@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { CommService, LayerRec } from '../../services/comm.service';
+
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 function validateURL(): ValidatorFn {
   const urlRe = new RegExp('^(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?');
@@ -20,19 +22,35 @@ function validateURL(): ValidatorFn {
 export class LayerFormComponent implements OnInit {
   form: FormGroup;
   wms_layer_options: string[] = [];
-  @Input() layerData: LayerRec | null = null;
+  layerData: LayerRec | null = null;
 
-  constructor(private fb: FormBuilder, private _commService: CommService) {
-    this.form = this.fb.group({
-      id: [null],
-      enabled: [null],
-      name: [null, [Validators.required, Validators.minLength(5)]],
-      layer_type: [null, [Validators.required]],
-      uri: [null, [Validators.required, validateURL()]],
-      filter: [null, [Validators.required]],
-      // password: [null, [Validators.required, Validators.minLength(6)]],
-      // confirmPassword: [null, [Validators.required]],
-    });
+  constructor(private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) data: LayerRec,
+    private _commService: CommService,
+    private dialogRef: MatDialogRef<LayerFormComponent>) {
+
+    if (data != null) {
+      this.layerData = data;
+      this.form = this.fb.group({
+        id: [data.id],
+        enabled: [data.enabled],
+        name: [data.name, [Validators.required, Validators.minLength(5)]],
+        layer_type: [data.layer_type, [Validators.required]],
+        uri: [data.uri, [Validators.required, validateURL()]],
+        filter: [data.filter, [Validators.required]],
+      });
+    }
+    else {
+      this.form = this.fb.group({
+        id: [null],
+        enabled: [null],
+        name: [null, [Validators.required, Validators.minLength(5)]],
+        layer_type: [null, [Validators.required]],
+        uri: ['https://geo.weather.gc.ca/geomet?lang=en&service=WMS&version=1.3.0&request=GetCapabilities', [Validators.required, validateURL()]],
+        filter: [null, [Validators.required]],
+      });
+    }
+
 
   }
   ngOnChanges() {
@@ -45,11 +63,11 @@ export class LayerFormComponent implements OnInit {
       this.form.controls['filter'].setValue(this.layerData.filter);
     }
   }
-  saveLayer(form: FormGroup) {
-
-    this._commService.createLayer(JSON.stringify(form.value, null, 4)).subscribe(result => {
-      alert("Written")
-    })
+  saveLayer() {
+    this.dialogRef.close(this.form.value);
+  }
+  cancel() {
+    this.dialogRef.close(null);
   }
   getWmsLayerOptions() {
     console.log("getting Capabilities");
@@ -60,7 +78,6 @@ export class LayerFormComponent implements OnInit {
       let targets = dom.evaluate(xpath, dom, null, XPathResult.ANY_TYPE, null);
       const nodes = [];
       let node: Node | null;
-      debugger;
       while (node = targets.iterateNext()) {
         //console.log(node.nodeValue)
         if (node != null) {
