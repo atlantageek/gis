@@ -1,8 +1,9 @@
 {
-  "dependencies": {
-    "dom": "^0.0.3",
-    "xml2js": "^0.4.23",
-    "xmldom": "^0.6.0",
-    "xpath": "^0.0.32"
-  }
+	"dependencies": {
+		"dom": "^0.0.3",
+		"wms-capabilities": "^0.5.1",
+		"xml2js": "^0.4.23",
+		"xmldom": "^0.6.0",
+		"xpath": "^0.0.32"
+	}
 }

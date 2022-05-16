@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { CommService, LayerRec } from '../../services/comm.service';
-
+import WMSCapabilities from 'wms-capabilities';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 function validateURL(): ValidatorFn {
@@ -72,23 +72,11 @@ export class LayerFormComponent implements OnInit {
   getWmsLayerOptions() {
     console.log("getting Capabilities");
     this._commService.getCapabilities(this.form.value['uri']).subscribe((data) => {
-      const parser = new DOMParser()
-      const dom = parser.parseFromString(data, 'application/xml')
-      let xpath = '//*[local-name()="Layer"][@cascaded="0"][not(.//*[local-name()="Layer"])]/*[local-name()="Name"]';
-      let targets = dom.evaluate(xpath, dom, null, XPathResult.ANY_TYPE, null);
-      const nodes = [];
-      let node: Node | null;
-      while (node = targets.iterateNext()) {
-        //console.log(node.nodeValue)
-        if (node != null) {
-          let elem = node.firstChild?.textContent;
-          if (elem != null && elem != undefined)
-            nodes.push(elem)
 
-        }
-        else nodes.push('UNKNOWN')
-      }
-      this.wms_layer_options = nodes;
+    let capabilities=new WMSCapabilities().parse(data).toJSON();
+    console.log(capabilities);
+
+
 
     })
   }

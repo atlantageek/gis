@@ -21,7 +21,8 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "typeRoots": [ "../src/typings.d.ts","./node_modules/@types"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
