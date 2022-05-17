@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { CommService, LayerRec } from '../../services/comm.service';
-import WMSCapabilities from 'wms-capabilities';
+import * as xml2js from 'xml2js';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 function validateURL(): ValidatorFn {
@@ -69,12 +69,60 @@ export class LayerFormComponent implements OnInit {
   cancel() {
     this.dialogRef.close(null);
   }
+
+  foundLayerGetNames(data:[]):string[] {
+    
+    let result:string[]=[];
+    for (let i=0;i<data.length;i++) {
+      
+      if ('LAYER' in data[i]) {
+        result=[...result,...this.findLayerNames(data[i]['LAYER'])];
+      }
+      else if ('NAME' in data[i]) {
+        console.log('Found Name' + (data[i]['NAME']));
+        result.push(data[i]['NAME'])
+      }
+    }
+    console.log("Found Layers" + result.length);
+    debugger;
+    return result;
+  }
+
+  findLayerNames(data:any):string[] {
+    //console.log('Find Layers')
+    let result:string[]=[];
+    if ((typeof data) == 'object' && !Array.isArray(data)) {
+      for(const key in data) {
+        if (key != 'LAYER') {
+          //console.log('Layer found')
+          //console.log(data[key])
+          result=[...result, ...this.findLayerNames(data[key])]
+        }
+        else {
+          result=[...this.foundLayerGetNames(data[key]), ...result];
+        }
+      }
+    }
+    else  if ((typeof data) == 'object' && Array.isArray(data)) {
+      //console.log('array found')
+      for (let i=0;i<data.length;i++) {
+        result=[...this.findLayerNames(data[i])]
+      }
+
+      
+    }
+    return result;
+  }
   getWmsLayerOptions() {
     console.log("getting Capabilities");
     this._commService.getCapabilities(this.form.value['uri']).subscribe((data) => {
-
-    let capabilities=new WMSCapabilities().parse(data).toJSON();
-    console.log(capabilities);
+      console.log("Processed);");
+      const parser = new xml2js.Parser({ strict: false, trim: true });
+      parser.parseString(data, (err, result) => {
+       let list=this.findLayerNames(result)
+       debugger;
+      });
+    
 
 
 
