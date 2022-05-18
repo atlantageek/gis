@@ -84,7 +84,6 @@ export class LayerFormComponent implements OnInit {
       }
     }
     console.log("Found Layers" + result.length);
-    debugger;
     return result;
   }
 
@@ -100,13 +99,14 @@ export class LayerFormComponent implements OnInit {
         }
         else {
           result=[...this.foundLayerGetNames(data[key]), ...result];
+          console.log(result);
         }
       }
     }
     else  if ((typeof data) == 'object' && Array.isArray(data)) {
       //console.log('array found')
       for (let i=0;i<data.length;i++) {
-        result=[...this.findLayerNames(data[i])]
+        result=[...this.findLayerNames(data[i]),...result]
       }
 
       
@@ -119,7 +119,7 @@ export class LayerFormComponent implements OnInit {
       console.log("Processed);");
       const parser = new xml2js.Parser({ strict: false, trim: true });
       parser.parseString(data, (err, result) => {
-       let list=this.findLayerNames(result)
+       this.wms_layer_options=this.findLayerNames(result).flat()
        debugger;
       });
     

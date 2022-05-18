@@ -100,8 +100,10 @@ export class CommService {
         return result;
     }
     public getCapabilities(url:string){
-        //'https://geo.weather.gc.ca/geomet?lang=en&service=WMS&version=1.3.0&request=GetCapabilities'
+        //'https://geo.weather.gc.ca/geomet?lang=en&service=WMS&version=1.3.0&request=GetCapabilities' // SERVICE=WMS&REQUEST=GetCapabilities
         let urlObj = new URL(url);
+        urlObj.searchParams.set('SERVICE','WMS')
+        
         urlObj.searchParams.set('request','GetCapabilities')
 
         return this.http.get(urlObj.href,{responseType: 'text'})
