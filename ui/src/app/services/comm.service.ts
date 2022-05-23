@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 export interface LayerRec{
     id:number,
     name:string,
-    enabled:boolean,
+    enabled:string,
     layer_type:string,
     source:string,
     uri:string,

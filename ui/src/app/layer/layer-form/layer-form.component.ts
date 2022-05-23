@@ -33,7 +33,7 @@ export class LayerFormComponent implements OnInit {
       this.layerData = data;
       this.form = this.fb.group({
         id: [data.id],
-        enabled: [data.enabled],
+        enabled: [data.enabled=='t'],
         name: [data.name, [Validators.required, Validators.minLength(5)]],
         layer_type: [data.layer_type, [Validators.required]],
         uri: [data.uri, [Validators.required, validateURL()]],
@@ -56,7 +56,7 @@ export class LayerFormComponent implements OnInit {
   ngOnChanges() {
     if (this.layerData != null) {
       this.form.controls['id'].setValue(this.layerData.id);
-      this.form.controls['enabled'].setValue(this.layerData.enabled);
+      this.form.controls['enabled'].setValue(this.layerData.enabled=='t');
       this.form.controls['name'].setValue(this.layerData.name);
       this.form.controls['layer_type'].setValue(this.layerData.layer_type);
       this.form.controls['uri'].setValue(this.layerData.uri);
@@ -70,43 +70,42 @@ export class LayerFormComponent implements OnInit {
     this.dialogRef.close(null);
   }
 
-  foundLayerGetNames(data:[]):string[] {
+  foundLayerGetNames(data:[],depth:number):string[] {
     
     let result:string[]=[];
     for (let i=0;i<data.length;i++) {
       
       if ('LAYER' in data[i]) {
-        result=[...result,...this.findLayerNames(data[i]['LAYER'])];
+        result=[...result,...this.findLayerNames(data[i],'LAYER',depth)];
       }
       else if ('NAME' in data[i]) {
-        console.log('Found Name' + (data[i]['NAME']));
         result.push(data[i]['NAME'])
       }
     }
-    console.log("Found Layers" + result.length);
     return result;
   }
 
-  findLayerNames(data:any):string[] {
-    //console.log('Find Layers')
+  findLayerNames(data:any, prevkey:string, depth:number):string[] {
     let result:string[]=[];
     if ((typeof data) == 'object' && !Array.isArray(data)) {
       for(const key in data) {
-        if (key != 'LAYER') {
-          //console.log('Layer found')
-          //console.log(data[key])
-          result=[...result, ...this.findLayerNames(data[key])]
+
+        if (key == 'LAYER') {
+          result=[...this.foundLayerGetNames(data[key],depth+1), ...result];
         }
-        else {
-          result=[...this.foundLayerGetNames(data[key]), ...result];
-          console.log(result);
+        else if (key == '$') {
+          
+          result=[...result, ...this.findLayerNames(data[key],prevkey,depth+1)]
+        }
+        else{
+          result=[...result, ...this.findLayerNames(data[key],key,depth+1)]
         }
       }
     }
     else  if ((typeof data) == 'object' && Array.isArray(data)) {
       //console.log('array found')
       for (let i=0;i<data.length;i++) {
-        result=[...this.findLayerNames(data[i]),...result]
+        result=[...this.findLayerNames(data[i], prevkey,depth+1),...result]
       }
 
       
@@ -119,13 +118,10 @@ export class LayerFormComponent implements OnInit {
       console.log("Processed);");
       const parser = new xml2js.Parser({ strict: false, trim: true });
       parser.parseString(data, (err, result) => {
-       this.wms_layer_options=this.findLayerNames(result).flat()
-       debugger;
+
+        this.wms_layer_options=this.findLayerNames(result,'ROOT',0).flat()
+       
       });
-    
-
-
-
     })
   }
 

@@ -1,9 +1,14 @@
 {
 	"dependencies": {
 		"dom": "^0.0.3",
+		"fs": "^0.0.1-security",
 		"wms-capabilities": "^0.5.1",
 		"xml2js": "^0.4.23",
 		"xmldom": "^0.6.0",
 		"xpath": "^0.0.32"
+	},
+	"devDependencies": {
+		"@types/node": "^17.0.35",
+		"typescript": "^4.6.4"
 	}
 }

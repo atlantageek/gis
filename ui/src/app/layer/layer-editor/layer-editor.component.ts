@@ -64,7 +64,6 @@ export class LayerEditorComponent implements OnInit {
         }
         else {
           this._commService.updateLayer(JSON.stringify(result, null, 4), result.id).subscribe(result => {
-            alert("Saved")
             this.updateList();
           });
         }
