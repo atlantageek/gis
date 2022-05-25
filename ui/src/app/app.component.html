@@ -13,13 +13,13 @@
 </mat-toolbar>
 <mat-sidenav-container  *ngIf="loggedin();else notlogin" >
   <mat-sidenav mode="side" #sidenav  opened="true">
-    nodehealth
+    nodehealthx
     <mat-list>
-      <button routerLink="layer/index" mat-flat-button>Layer Config</button>
-    </mat-list>
+      <mat-list-item><button routerLink="layer/index" mat-flat-button>Layer Config</button></mat-list-item>
+   
     
-    <mat-list>
-      <button routerLink="map/index" mat-flat-button>Map</button>
+
+      <mat-list-item><button routerLink="map/index" mat-flat-button>Map</button></mat-list-item>
     </mat-list>
     
   </mat-sidenav>

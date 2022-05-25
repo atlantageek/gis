@@ -7,9 +7,10 @@ import { AuthGuard} from './helpers/authguard';
 import { LayerModule } from './layer/layer.module';
 import { MapModule } from './map/map.module';
 const routes: Routes = [
-  { path: '', component: MainComponent,  canActivate: [AuthGuard] },
+  //{ path: '', component: MainComponent,  canActivate: [AuthGuard] },
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
+  { path: '',   redirectTo: '/map/index', pathMatch: 'full' }
 ];
 
 @NgModule({

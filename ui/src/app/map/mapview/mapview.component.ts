@@ -32,8 +32,15 @@ export class MapviewComponent implements OnInit {
     
  
   }
+  public mapMoved(event:any) {
+    console.log(event)
+  }
   public onMapReady(mapx:Map): void {
     this.map=mapx;
+    let zoom=parseInt(localStorage.getItem('zoom') || '5')
+    let lat=parseInt(localStorage.getItem('lat') || '5')
+    let lng=parseInt(localStorage.getItem('lng') || '5')
+    this.map.setView(latLng(lat,lng),zoom);
     this.commService.getLayers().subscribe((layers) => {
       layers.filter(layer => layer.layer_type != 'secondary' && layer.enabled == 't').forEach(layer => {
         const tiles=tileLayer.wms(layer.uri, { layers: layer.filter  })
@@ -43,6 +50,15 @@ export class MapviewComponent implements OnInit {
         debugger;
         const tiles=tileLayer.wms(layer.uri, { layers: layer.filter, format:'image/png', transparent:true  })
         tiles.addTo(<Map>this.map)
+      })
+      this.map?.on('moveend',() => {
+        let zoom=this.map?.getZoom();
+        let center=this.map?.getCenter();
+        if (zoom && center) {
+          localStorage.setItem('zoom',zoom?.toString())
+          localStorage.setItem('lat',center.lat.toString());
+          localStorage.setItem('lng',center.lng.toString());
+        }
       })
       // layers.forEach(layer=> {
       //   if (layer.layer_type == 'secondary') {
